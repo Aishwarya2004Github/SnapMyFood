@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analysis Result - SnapMyFood</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/dist/css/all.min.css">
+    <style>
+        body {
+            background-color: #f4f7f9;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .result-card {
+            border: none;
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        }
+
+        .image-section {
+            background: #fff;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .food-img {
+            max-height: 350px;
+            width: 100%;
+            object-fit: cover;
+            border-radius: 20px;
+            border: 8px solid #f8f9fa;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .nutrition-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .metric-box {
+            background: #fff;
+            padding: 15px;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid #eee;
+            transition: 0.3s;
+        }
+
+        .metric-box:hover {
+            transform: translateY(-5px);
+            border-color: #ffc107;
+        }
+
+        .metric-value {
+            display: block;
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: #333;
+        }
+
+        .metric-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: #888;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .info-section {
+            background: #fff;
+            padding: 40px;
+        }
+
+        .dish-name {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #1a1a1a;
+            margin-bottom: 5px;
+        }
+
+        .ingredients-box {
+            background: #fff9e6;
+            border-left: 5px solid #ffc107;
+            padding: 20px;
+            border-radius: 0 15px 15px 0;
+            margin: 25px 0;
+        }
+
+        .btn-check-new {
+            background: #1a1a1a;
+            color: white;
+            border-radius: 50px;
+            padding: 15px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.3s;
+            border: none;
+        }
+
+        .btn-check-new:hover {
+            background: #ffc107;
+            color: #000;
+            transform: scale(1.02);
+        }
+    </style>
+</head>
+<body>
+    {% include 'nav.html' %}
+
+    <div class="container mt-5 mb-5">
+        <div class="card result-card">
+            <div class="row g-0">
+                <div class="col-lg-5 image-section border-end">
+                    <img src="{{ img_url }}" class="food-img mb-4" alt="Predicted Dish">
+                    <div class="badge bg-success rounded-pill px-4 py-2 shadow-sm" style="font-size: 0.9rem;">
+                        <i class="fas fa-microchip me-2"></i>AI Confidence: {{ accuracy }}
+                    </div>
+                </div>
+
+                <div class="col-lg-7 info-section">
+                    <h1 class="dish-name">{{ dish }}</h1>
+                    <p class="text-muted"><i class="fas fa-info-circle me-1"></i> {{ desc }}</p>
+
+                    <div class="ingredients-box">
+                        <h5 class="fw-bold text-dark"><i class="fas fa-leaf me-2 text-success"></i>Ingredients</h5>
+                        <p class="mb-0 text-dark opacity-75">{{ ingredients }}</p>
+                    </div>
+
+                    <h5 class="fw-bold mt-4 mb-3">🔥 Nutritional Facts <small class="text-muted fw-normal">(per 100g)</small></h5>
+                    
+                    <div class="nutrition-grid">
+                        <div class="metric-box shadow-sm">
+                            <span class="metric-label">Calories</span>
+                            <span class="metric-value text-danger">{{ nut.calories }} <small>kcal</small></span>
+                        </div>
+                        <div class="metric-box shadow-sm">
+                            <span class="metric-label">Protein</span>
+                            <span class="metric-value text-primary">{{ nut.protein }} <small>g</small></span>
+                        </div>
+                        <div class="metric-box shadow-sm">
+                            <span class="metric-label">Carbs</span>
+                            <span class="metric-value text-success">{{ nut.carbs }} <small>g</small></span>
+                        </div>
+                        <div class="metric-box shadow-sm">
+                            <span class="metric-label">Fat</span>
+                            <span class="metric-value text-warning">{{ nut.fat }} <small>g</small></span>
+                        </div>
+                        <div class="metric-box shadow-sm">
+                            <span class="metric-label">Fiber</span>
+                            <span class="metric-value text-info">{{ nut.fiber }} <small>g</small></span>
+                        </div>
+                        <div class="metric-box shadow-sm">
+                            <span class="metric-label">Sugar</span>
+                            <span class="metric-value" style="color: #e83e8c;">{{ nut.sugar }} <small>g</small></span>
+                        </div>
+                    </div>
+
+                    <div class="mt-5">
+                        <a href="/dashboard" class="btn btn-check-new w-100 shadow">
+                            <i class="fas fa-redo me-2"></i> Analyze Another Dish
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

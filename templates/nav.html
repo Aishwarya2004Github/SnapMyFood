@@ -1,0 +1,76 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4 shadow-lg sticky-top" style="border-bottom: 2px solid #ffc107;">
+    <div class="container-fluid">
+        <a class="navbar-brand fw-bold d-flex align-items-center" href="/dashboard" style="letter-spacing: 1px;">
+            <i class="fas fa-utensils text-warning me-2"></i>
+            Snap<span class="text-warning">MyFood</span>
+        </a>
+        
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto align-items-center">
+                <li class="nav-item">
+                    <a class="nav-link px-3" href="/history">
+                        <i class="fas fa-clock-rotate-left me-1"></i> History
+                    </a>
+                </li>
+                
+                <li class="nav-item d-none d-lg-block">
+                    <span class="text-secondary mx-2">|</span>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link text-warning fw-bold px-3 d-flex align-items-center" href="/profile">
+                        <div class="avatar-circle me-2">
+                            {{ session['username'][0] | upper }}
+                        </div>
+                        {{ session['username'] }}
+                    </a>
+                </li>
+                
+                <li class="nav-item ms-lg-3">
+                    <a class="btn btn-outline-danger btn-sm rounded-pill px-4 fw-bold shadow-sm" href="/logout">
+                        <i class="fas fa-sign-out-alt me-1"></i> Logout
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<style>
+    /* Navbar Custom Enhancements */
+    .navbar {
+        background: rgba(33, 37, 41, 0.95) !important;
+        backdrop-filter: blur(10px);
+    }
+    
+    .nav-link {
+        font-size: 0.95rem;
+        transition: 0.3s ease;
+    }
+
+    .nav-link:hover {
+        color: #ffc107 !important;
+        transform: translateY(-1px);
+    }
+
+    .avatar-circle {
+        width: 30px;
+        height: 30px;
+        background: #ffc107;
+        color: #000;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.8rem;
+        font-weight: bold;
+    }
+
+    .navbar-brand {
+        font-size: 1.4rem;
+    }
+</style>
