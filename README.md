@@ -17,3 +17,9 @@
 * **Artificial Intelligence:** TensorFlow/Keras (CNN) for classification & OpenCV for image processing.
 * **Frontend:** HTML5, CSS3 (Modern Glassmorphism), and JavaScript.
 * **Database:** SQL-based management for user accounts and historical analysis data.
+
+
+## DEMO
+
+https://github.com/user-attachments/assets/5bb85072-12a3-4db3-acc6-c1cd1f96881a
+
